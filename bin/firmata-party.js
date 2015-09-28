@@ -8,6 +8,7 @@ var _ = require('underscore');
 var args = (process.argv.slice(2));
 var argv = parseArgs(args, opts={})
 var arduino = argv._[0];
+var debug = argv.debug;
 var help = 'usage: firmata-party <arduino name>';
 var supported = _.keys(supportedBoards).join(', ');
 
@@ -31,7 +32,7 @@ function handleInput(board) {
     showSupported();
     return process.exit(status);
   } else {
-    flash({board: board, debug: true});
+    flash({board: board, debug: debug});
   }
 }
 
