@@ -30,7 +30,7 @@ function handleInput(board) {
 
 function flash(options) {
   var avrgirl = new Avrgirl(options);
-  var filepath = path.resolve(__dirname + '/../node_modules', 'avrgirl-arduino', 'junk', 'hex', options.board, 'StandardFirmata.cpp.hex');
+  var filepath = path.resolve(__dirname, '..', 'node_modules', 'avrgirl-arduino', 'junk', 'hex', options.board, 'StandardFirmata.cpp.hex');
   //console.log(filepath)
 
   avrgirl.flash(filepath, function(error) {
