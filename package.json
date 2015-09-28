@@ -6,6 +6,10 @@
   "bin": {
     "firmata-party": "./bin/firmata-party.js"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/noopkat/firmata-party.git"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
