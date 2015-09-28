@@ -17,8 +17,11 @@ function showHelp() {
 handleInput(arduino);
 
 function handleInput(board) {
-  if (board && _.has(supportedBoards, board)) {
+  if (board && board !== 'list' && _.has(supportedBoards, board)) {
     flash({board: board});
+  } else if (board && board === 'list') {
+    supported = _.keys(supportedBoards).join(', ');
+    console.log('supported board flags: \n' + supported);
   } else {
     showHelp();
     return process.exit(1);
