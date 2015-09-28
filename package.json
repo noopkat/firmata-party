@@ -1,0 +1,23 @@
+{
+  "name": "firmata-party",
+  "version": "0.0.0",
+  "description": "set up your arduino with firmata and party on, robot friends.",
+  "main": "firmata-party.js",
+  "bin": {
+    "firmata-party": "./bin/firmata-party.js"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "arduino",
+    "firmata"
+  ],
+  "author": "Suz Hinton",
+  "license": "MIT",
+  "dependencies": {
+    "avrgirl-arduino": "^1.4.0",
+    "minimist": "^1.2.0",
+    "underscore": "^1.8.3"
+  }
+}
