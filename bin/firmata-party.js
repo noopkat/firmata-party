@@ -9,22 +9,29 @@ var args = (process.argv.slice(2));
 var argv = parseArgs(args, opts={})
 var arduino = argv._[0];
 var help = 'usage: firmata-party <arduino name>';
+var supported = _.keys(supportedBoards).join(', ');
 
 function showHelp() {
   console.log(help);
 }
 
+function showSupported() {
+  console.log('supported board flags: \n' + supported);
+}
+
 handleInput(arduino);
 
 function handleInput(board) {
-  if (board && board !== 'list' && _.has(supportedBoards, board)) {
-    flash({board: board, debug: true});
-  } else if (board && (board === 'list' || !_.has(supportedBoards, board))) {
-    supported = _.keys(supportedBoards).join(', ');
-    console.log('supported board flags: \n' + supported);
-  } else {
+  if (!board || board === 'help' || board === 'man') {
+    var status = board ? 0 : 1;
     showHelp();
-    return process.exit(1);
+    return process.exit(status);
+  } else if (!_.has(supportedBoards, board)) {
+    var status = (board === 'list') ? 0 : 1;
+    showSupported();
+    return process.exit(status);
+  } else {
+    flash({board: board, debug: true});
   }
 }
 
