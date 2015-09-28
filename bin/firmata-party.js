@@ -19,7 +19,7 @@ handleInput(arduino);
 function handleInput(board) {
   if (board && board !== 'list' && _.has(supportedBoards, board)) {
     flash({board: board, debug: true});
-  } else if (board && board === 'list') {
+  } else if (board && (board === 'list' || !_.has(supportedBoards, board))) {
     supported = _.keys(supportedBoards).join(', ');
     console.log('supported board flags: \n' + supported);
   } else {
