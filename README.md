@@ -10,9 +10,12 @@ Supported boards:
 + **Arduino Micro**
 + **Arduino Nano**
 + **Arduino Duemilanove (168)**
++ **Arduino Pro Mini**
 + **Femtoduino IMUduino**
 + **Blend-Micro**
 + **Tinyduino**
++ **Sparkfun Pro Micro**
++ **Qtechknow Qduino**
 
 ## How to install
 
