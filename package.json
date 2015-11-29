@@ -1,6 +1,6 @@
 {
   "name": "firmata-party",
-  "version": "1.1.6",
+  "version": "1.1.7",
   "description": "set up your arduino with firmata and party on, robot friends.",
   "main": "firmata-party.js",
   "bin": {
