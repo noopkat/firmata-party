@@ -2,7 +2,7 @@
 var Avrgirl = require('avrgirl-arduino');
 var parseArgs = require('minimist');
 var path = require('path');
-var supportedBoards = require('../node_modules/avrgirl-arduino/boards.js');
+var supportedBoards = require('../node_modules/avrgirl-arduino/boards.js').byName;
 var _ = require('underscore');
 
 var args = (process.argv.slice(2));
