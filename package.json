@@ -21,6 +21,7 @@
   "license": "MIT",
   "dependencies": {
     "avrgirl-arduino": "1.6.5",
+    "keypress": "^0.2.1",
     "minimist": "^1.2.0",
     "underscore": "^1.8.3"
   }

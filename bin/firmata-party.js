@@ -4,12 +4,14 @@ var parseArgs = require('minimist');
 var path = require('path');
 var supportedBoards = require('../node_modules/avrgirl-arduino/boards.js').byName;
 var _ = require('underscore');
+var keypress = require('keypress');
 
 var args = (process.argv.slice(2));
 var argv = parseArgs(args, opts={})
 var arduino = argv._[0];
 var debug = argv.debug;
-var help = 'usage: firmata-party <arduino name>';
+var partyMode = argv.party;
+var help = 'usage: firmata-party <arduino name> [--party] [--debug]';
 var supported = _.keys(supportedBoards).join(', ');
 
 function showHelp() {
@@ -31,17 +33,21 @@ function handleInput(board) {
     var status = (board === 'list') ? 0 : 1;
     showSupported();
     return process.exit(status);
+  } else if (partyMode) {
+    party({board: board, debug: debug});
   } else {
-    flash({board: board, debug: debug});
+    flashAndQuit({board: board, debug: debug});
   }
 }
 
-function flash(options) {
+function flash(options, callback) {
   var avrgirl = new Avrgirl(options);
   var filepath = path.resolve(__dirname, '..', 'node_modules', 'avrgirl-arduino', 'junk', 'hex', options.board, 'StandardFirmata.cpp.hex');
-  //console.log(filepath)
+  avrgirl.flash(filepath, callback);
+}
 
-  avrgirl.flash(filepath, function(error) {
+function flashAndQuit(options) {
+  flash(options, function(error) {
     if (error) {
       console.error(error);
       return process.exit(1);
@@ -49,5 +55,34 @@ function flash(options) {
       return process.exit();
     }
   });
+}
 
+function party(options) {
+  var boardsFlashed = 0;
+  keypress(process.stdin);
+  process.stdin.setRawMode(true);
+  process.stdin.resume();
+  var flashing = false;
+
+  console.log("Press any key to start the party! or q to go home!");
+
+  process.stdin.on('keypress', function (ch, key) {
+    if (!key ) { return; }
+    if ((key.ctrl && key.name == 'c') || key.name == 'q') {
+      return process.exit();
+    }
+
+    if (flashing) { return; }
+
+    flashing = true;
+    console.log('Starting the Party!');
+    flash(options, function(error) {
+      if (error) {
+        console.error("Oh no! Party foul!", error);
+      } else{
+        console.error("Success! Party legend! Press any key to keep partying!");
+      }
+      flashing = false;
+    });
+  });
 }
