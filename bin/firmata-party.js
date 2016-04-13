@@ -5,34 +5,35 @@ var supportedBoards = require('../node_modules/avrgirl-arduino/boards.js').byNam
 var _ = require('underscore');
 var keypress = require('keypress');
 var argv = require('minimist')(process.argv.slice(2), opts = {
-  boolean: ['party', 'debug']
+  boolean: ['party', 'debug', 'help']
 });
 
-var arduino = argv._[0];
 var debugMode = argv.debug;
 var partyMode = argv.party;
-var help = 'usage: firmata-party <arduino name> [--party] [--debug]';
+var helpMsg = 'usage: firmata-party [<arduino name> | <command>] [--party] [--debug]';
 var supported = _.keys(supportedBoards).join(', ');
 
 function showHelp() {
-  console.log(help);
+  console.log(helpMsg);
 }
 
 function showSupported() {
   console.log('supported board flags: \n' + supported);
 }
 
-handleInput(arduino);
+handleArgs(argv);
 
-function handleInput(board) {
-  if (!board || board === 'help' || board === 'man') {
+function handleArgs(argv) {
+  var board = argv._[0];
+  var args = argv._;
+
+  if (!argv || args.indexOf('help') > -1 || args.indexOf('man') > -1) {
     var status = board ? 0 : 1;
     showHelp();
     return process.exit(status);
-  } else if (!_.has(supportedBoards, board)) {
-    var status = (board === 'list') ? 0 : 1;
+  } else if (args.indexOf('list') > -1) {
     showSupported();
-    return process.exit(status);
+    return process.exit(0);
   } else if (partyMode) {
     party({board: board, debug: debugMode});
   } else {
