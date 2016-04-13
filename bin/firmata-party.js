@@ -1,15 +1,15 @@
 #!/usr/bin/env node
 var Avrgirl = require('avrgirl-arduino');
-var parseArgs = require('minimist');
 var path = require('path');
 var supportedBoards = require('../node_modules/avrgirl-arduino/boards.js').byName;
 var _ = require('underscore');
 var keypress = require('keypress');
+var argv = require('minimist')(process.argv.slice(2), opts = {
+  boolean: ['party', 'debug']
+});
 
-var args = (process.argv.slice(2));
-var argv = parseArgs(args, opts={})
 var arduino = argv._[0];
-var debug = argv.debug;
+var debugMode = argv.debug;
 var partyMode = argv.party;
 var help = 'usage: firmata-party <arduino name> [--party] [--debug]';
 var supported = _.keys(supportedBoards).join(', ');
@@ -34,9 +34,9 @@ function handleInput(board) {
     showSupported();
     return process.exit(status);
   } else if (partyMode) {
-    party({board: board, debug: debug});
+    party({board: board, debug: debugMode});
   } else {
-    flashAndQuit({board: board, debug: debug});
+    flashAndQuit({board: board, debug: debugMode});
   }
 }
 
