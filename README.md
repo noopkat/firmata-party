@@ -1,4 +1,4 @@
-# firmata-party
+# :balloon: :tada: firmata-party :tada: :balloon:
 
 This CLI tool provides a quick way to flash Standard Firmata to your Arduino board.
 
