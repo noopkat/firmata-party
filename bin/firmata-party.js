@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 var Avrgirl = require('avrgirl-arduino');
 var path = require('path');
-var supportedBoards = require('../node_modules/avrgirl-arduino/boards.js').byName;
+var supportedBoards = require('../boards.js').byName;
 var _ = require('underscore');
 var keypress = require('keypress');
 var argv = require('minimist')(process.argv.slice(2), opts = {
