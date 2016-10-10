@@ -52,7 +52,13 @@ function handleArgs(argv) {
 
 function flash(options, callback) {
   var avrgirl = new Avrgirl(options);
-  var filepath = path.resolve(__dirname, '..', 'node_modules', 'avrgirl-arduino', 'junk', 'hex', options.board, 'StandardFirmata.cpp.hex');
+
+  var hexFile = supportedBoards[options.board].hexFile
+  if (hexFile === undefined) {
+    hexFile = 'StandardFirmata.cpp.hex';
+  }
+  
+  var filepath = path.resolve(__dirname, '..', 'node_modules', 'avrgirl-arduino', 'junk', 'hex', options.board, hexFile);
   avrgirl.flash(filepath, callback);
 }
 

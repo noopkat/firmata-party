@@ -114,7 +114,8 @@ var boards = {
     pageSize: 128,
     numPages: 256,
     timeout: 400,
-    protocol: 'stk500v1'
+    protocol: 'stk500v1',
+    hexFile: 'StandardFirmata-3v.cpp.hex'
   },
   'qduino': {
     baud: 57600,
