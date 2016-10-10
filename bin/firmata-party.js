@@ -10,7 +10,14 @@ var argv = require('minimist')(process.argv.slice(2), opts = {
 
 var debugMode = argv.debug;
 var partyMode = argv.party;
-var helpMsg = 'usage: firmata-party [<arduino name> | <command>] [--party] [--debug]';
+var helpMsg = `usage: firmata-party [<arduino name> | <command>] [--party] [--debug]
+
+firmata-party list # list all supported boards
+firmata-party uno # flash Standard Firmata to an Arduino Uno
+firmata-party uno --debug # show debug info
+firmata-party uno --party # keep flashing firmata on new arduinos until you quit the program with ctrl+c!
+firmata-party help # show usage info
+`;
 var supported = _.keys(supportedBoards).join(', ');
 
 function showHelp() {
