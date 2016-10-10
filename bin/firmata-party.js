@@ -34,10 +34,19 @@ function handleArgs(argv) {
   } else if (args.indexOf('list') > -1) {
     showSupported();
     return process.exit(0);
-  } else if (partyMode) {
-    party({board: board, debug: debugMode});
   } else {
-    flashAndQuit({board: board, debug: debugMode});
+
+    var options = {board: board, debug: debugMode};
+
+    if (args.length > 1) {
+      options["port"] = args[1]
+    }
+    
+    if (partyMode) {
+      party(options);
+    } else {
+      flashAndQuit(options);
+    }
   }
 }
 
