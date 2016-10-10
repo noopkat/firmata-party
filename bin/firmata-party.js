@@ -26,8 +26,7 @@ handleArgs(argv);
 function handleArgs(argv) {
   var board = argv._[0];
   var args = argv._;
-
-  if (!argv || args.indexOf('help') > -1 || args.indexOf('man') > -1) {
+  if (!argv || args.length == 0 || args.indexOf('help') > -1 || args.indexOf('man') > -1) {
     var status = board ? 0 : 1;
     showHelp();
     return process.exit(status);
