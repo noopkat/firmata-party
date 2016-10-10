@@ -13,11 +13,13 @@ This CLI tool provides a quick way to flash Standard Firmata to your Arduino boa
 usage: firmata-party [<arduino name> | list] [--party] [--debug]
 
 firmata-party list # list all supported boards
-firmata-party uno # flash Standard Firmata to an Arduino Uno
-firmata-party uno --debug # show debug info
-firmata-party uno --party # keep flashing firmata on new arduinos until you quit the program with ctrl+c!
+firmata-party uno [port] # flash Standard Firmata to an Arduino Uno
+firmata-party uno [port] --debug # show debug info
+firmata-party uno [port] --party # keep flashing firmata on new arduinos until you quit the program with ctrl+c!
 firmata-party help # show usage info
 ```
+
+Note that the port will be auto-detected except in the case of the Pro Mini (see avrgirl-arduino for more info).
 
 ## Supported boards:
 
