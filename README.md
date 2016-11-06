@@ -25,6 +25,7 @@ Note that the port will be auto-detected except in the case of the Pro Mini (see
 
 + **Arduino Uno**
 + **Arduino Mega**
++ **Arduino ADK**
 + **Arduino Leonardo**
 + **Arduino Micro**
 + **Arduino Nano**
