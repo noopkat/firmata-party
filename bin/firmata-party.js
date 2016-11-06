@@ -40,16 +40,31 @@ function handleArgs(argv) {
   } else if (args.indexOf('list') > -1) {
     showSupported();
     return process.exit(0);
-  } else if (partyMode) {
-    party({board: board, debug: debugMode});
   } else {
-    flashAndQuit({board: board, debug: debugMode});
+
+    var options = {board: board, debug: debugMode};
+
+    if (args.length > 1) {
+      options["port"] = args[1]
+    }
+    
+    if (partyMode) {
+      party(options);
+    } else {
+      flashAndQuit(options);
+    }
   }
 }
 
 function flash(options, callback) {
   var avrgirl = new Avrgirl(options);
-  var filepath = path.resolve(__dirname, '..', 'node_modules', 'avrgirl-arduino', 'junk', 'hex', options.board, 'StandardFirmata.cpp.hex');
+
+  var hexFile = supportedBoards[options.board].hexFile
+  if (hexFile === undefined) {
+    hexFile = 'StandardFirmata.cpp.hex';
+  }
+  
+  var filepath = path.resolve(__dirname, '..', 'node_modules', 'avrgirl-arduino', 'junk', 'hex', options.board, hexFile);
   avrgirl.flash(filepath, callback);
 }
 
