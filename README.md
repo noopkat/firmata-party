@@ -19,7 +19,7 @@ firmata-party uno [port] --party # keep flashing firmata on new arduinos until y
 firmata-party help # show usage info
 ```
 
-Note that the port will be auto-detected except in the case of the Pro Mini (see avrgirl-arduino for more info).
+Note that the port will be auto-detected except in the case of the Pro Mini (see [avrgirl-arduino](https://github.com/noopkat/avrgirl-arduino) for more info).
 
 ## Supported boards:
 
