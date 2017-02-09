@@ -31,8 +31,13 @@ Note that the port will be auto-detected except in the case of the Pro Mini (see
 + **Arduino Nano**
 + **Arduino Duemilanove (168)**
 + **Arduino Pro Mini**
++ **Arduino Lilypad USB**
++ **Arduino Yun**
 + **Femtoduino IMUduino**
-+ **Blend-Micro**
++ **RedBearLab Blend Micro**
 + **Tinyduino**
 + **Sparkfun Pro Micro**
 + **Qtechknow Qduino**
++ **Pinoccio Scout**
++ **Adafruit Feather 32u4 Basic Proto**
++ **Arduboy**
