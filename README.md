@@ -1,5 +1,7 @@
 # :balloon: :tada: firmata-party :tada: :balloon:
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/noopkat/firmata-party.svg)](https://greenkeeper.io/)
+
 This CLI tool provides a quick way to flash Standard Firmata to your Arduino board.
 
 ## Install
