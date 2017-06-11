@@ -1,12 +1,11 @@
 #!/usr/bin/env node
 var Avrgirl = require('avrgirl-arduino');
 var path = require('path');
-var supportedBoards = require('../boards.js').byName;
-var _ = require('underscore');
 var keypress = require('keypress');
 var argv = require('minimist')(process.argv.slice(2), opts = {
   boolean: ['party', 'debug', 'help']
 });
+var fs = require('fs');
 
 var debugMode = argv.debug;
 var partyMode = argv.party;
@@ -18,14 +17,16 @@ firmata-party uno --debug # show debug info
 firmata-party uno --party # keep flashing firmata on new arduinos until you quit the program with ctrl+c!
 firmata-party help # show usage info
 `;
-var supported = _.keys(supportedBoards).join(', ');
+
+var supportedBoards = Avrgirl.listKnownBoards();
+var supportedBoardsString = supportedBoards.join(', ');
 
 function showHelp() {
   console.log(helpMsg);
 }
 
 function showSupported() {
-  console.log('supported board flags: \n' + supported);
+  console.log('supported board flags: \n' + supportedBoardsString);
 }
 
 handleArgs(argv);
@@ -44,6 +45,11 @@ function handleArgs(argv) {
 
     var options = {board: board, debug: debugMode};
 
+    if (supportedBoards.indexOf(options.board) < 0) {
+      var error = new Error("oops! Sorry, the board '" + options.board + "'' is not currently supported");
+      return console.error(error);
+    }
+
     if (args.length > 1) {
       options["port"] = args[1]
     }
@@ -58,14 +64,28 @@ function handleArgs(argv) {
 
 function flash(options, callback) {
   var avrgirl = new Avrgirl(options);
-
-  var hexFile = supportedBoards[options.board].hexFile
-  if (hexFile === undefined) {
-    hexFile = 'StandardFirmata.cpp.hex';
-  }
   
-  var filepath = path.resolve(__dirname, '..', 'node_modules', 'avrgirl-arduino', 'junk', 'hex', options.board, hexFile);
-  avrgirl.flash(filepath, callback);
+  var firmataDir = path.resolve(__dirname, '..', 'node_modules', 'avrgirl-arduino', 'junk', 'hex', options.board);
+  var firmataPath;
+
+  fs.readdir(firmataDir, function(err, files) {
+    if (err) { return console.error(err); }
+
+    for (var i = 0, len = files.length; i < len; i++) {
+      var filename = files[i];
+      if (filename.indexOf('StandardFirmata') > -1) {
+        firmataPath = path.join(firmataDir, filename);
+        break;
+      }
+    };
+
+    if (typeof firmataPath === 'undefined') {
+      var error = new Error("oops! Couldn't find Standard Firmata file for " + options.board + " board.");
+      return console.error(error);
+    }
+
+    avrgirl.flash(firmataPath, callback);
+  });
 }
 
 function flashAndQuit(options) {

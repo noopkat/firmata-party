@@ -22,7 +22,6 @@
   "dependencies": {
     "avrgirl-arduino": "*",
     "keypress": "^0.2.1",
-    "minimist": "^1.2.0",
-    "underscore": "^1.8.3"
+    "minimist": "^1.2.0"
   }
 }
