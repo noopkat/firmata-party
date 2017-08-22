@@ -41,3 +41,4 @@ Note that the port will be auto-detected except in the case of the Pro Mini (see
 + **Pinoccio Scout**
 + **Adafruit Feather 32u4 Basic Proto**
 + **Arduboy**
++ **Adafruit Circuit Playground Classic**
