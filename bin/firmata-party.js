@@ -53,7 +53,7 @@ function handleArgs(argv) {
     if (args.length > 1) {
       options["port"] = args[1]
     }
-    
+
     if (partyMode) {
       party(options);
     } else {
@@ -64,8 +64,9 @@ function handleArgs(argv) {
 
 function flash(options, callback) {
   var avrgirl = new Avrgirl(options);
-  
-  var firmataDir = path.resolve(__dirname, '..', 'node_modules', 'avrgirl-arduino', 'junk', 'hex', options.board);
+
+  var avrgirlDir = path.dirname(require.resolve('avrgirl-arduino'));
+  var firmataDir = path.resolve(avrgirlDir, 'junk', 'hex', options.board);
   var firmataPath;
 
   fs.readdir(firmataDir, function(err, files) {
