@@ -20,7 +20,7 @@
   "author": "Suz Hinton",
   "license": "MIT",
   "dependencies": {
-    "avrgirl-arduino": "^4.0.0",
+    "avrgirl-arduino": "^4.2.3",
     "keypress": "^0.2.1",
     "minimist": "^1.2.0"
   }
